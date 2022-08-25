@@ -1,3 +1,4 @@
+from msilib.schema import Font
 from tkinter import *
 
 ws = Tk()
@@ -5,7 +6,7 @@ ws.geometry('400x300')
 ws.title('Welcome!')
 ws['bg']='#5d8a82'
 
-f = ("Times bold", 14)
+f = ("Times New Roman", 14)
 
 def back():
     ws.destroy()
@@ -26,7 +27,8 @@ Button(
     ws, 
     text="Go to Login page", 
     font=f,
-    command=back
+    command=back,
+
     ).pack(fill=X, expand=TRUE, side=LEFT)
 
 

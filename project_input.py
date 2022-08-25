@@ -9,51 +9,60 @@ f = ("Times bold", 14)
 r.title("Sign-in page")
 def submit():
     firstname=(t1.get())
+    if not firstname.isalpha():
+        l7.config(text="zc",fg='red')
     lastname=(t2.get())
     username=(t3.get())
     email=(t4.get())
     password=(t5.get())
     cpassword=(t6.get())
-    
+    # sql=('''select username from page''')
+    # cursor.execute(sql)
+    # result=cursor.fetchall()
+    # for i in result:
+    #     print(i[0])
+
     add_page = ("INSERT INTO page "
                "(first_name, last_name, username, email, password, cpassword) "
                "VALUES (%s, %s, %s, %s, %s, %s)")
-
     data_page = (firstname, lastname, username, email, password, cpassword)
     
-    cursor.execute(add_page, data_page)
 
-
-    cnx.commit()
-
-    cursor.close()
-    cnx.close()
     
-    
-    if(password == cpassword and lastname and username and email and password and cpassword and firstname != ""):
+    # if(username==i[0]):
+    #     l7.config(text="name already taken",fg='red')
+    if(password == cpassword and lastname.isalpha() and username and '@'in email and password and cpassword and firstname!= "" and firstname.isalpha()):
+
+        cursor.execute(add_page, data_page)
+
+        cnx.commit()
+
+        cursor.close()
+        cnx.close()        
         r.destroy()
         import project_login
     elif(firstname and lastname and username and email and password and cpassword != "" and password != cpassword):
-        l7.config(text="passwords do no match!")
+        l7.config(text="passwords do no match!",fg='red')
+
     else:
-        l7.config(text="something is missing!")
+        l7.config(text="something is missing!",fg='red')
 r.geometry('393x250')
-l1=Label(r,text="First name")
-t1=Entry(r,bd=5,font=('Arial',13))
-l2=Label(r,text="Last name")
-t2=Entry(r,bd=5,font=('Arial',13))
-l3=Label(r,text="Username")
-t3=Entry(r,bd=5,font=('Arial',13))
-l4=Label(r,text="Email")
-t4=Entry(r,bd=5,font=('Arial',13))
-l5=Label(r,text="Password")
-t5=Entry(r,bd=5,show=None,font=('Arial',13))
-t5=Entry(r,bd=5,show='*',font=('Arial',13))
-l6=Label(r,text="Confirm-Password")
-t6=Entry(r,bd=5,show=None,font=('Arial',13))
-t6=Entry(r,bd=5,show='*',font=('Arial',13))
-bt=Button(r,text="Submit",command=lambda: submit())
-l7=Label(r,text="")
+l1=Label(r,text="First name",font=('Times New Roman',13))
+t1=Entry(r,bd=5,font=('Times New Roman',13))
+l2=Label(r,text="Last name",font=('Times New Roman',13))
+t2=Entry(r,bd=5,font=('Times New Roman',13))
+l3=Label(r,text="Username",font=('Times New Roman',13))
+t3=Entry(r,bd=5,font=('Times New Roman',13))
+l4=Label(r,text="Email",font=('Times New Roman',13))
+t4=Entry(r,bd=5,font=('Times New Roman',13))
+l5=Label(r,text="Password",font=('Times New Roman',13))
+t5=Entry(r,bd=5,show=None,font=('Times New Roman',13))
+t5=Entry(r,bd=5,show='*',font=('Times New Roman',13))
+l6=Label(r,text="Confirm-Password",font=('Times New Roman',13))
+t6=Entry(r,bd=5,show=None,font=('Times New Roman',13))
+t6=Entry(r,bd=5,show='*',font=('Times New Roman',13))
+bt=Button(r,text="Submit",command=lambda: submit(),width=10,bg="light blue",fg="black",cursor="hand2")
+l7=Label(r,text="",font=('Times New Roman',13))
 
 l2.grid(row=0,column=1)
 t2.grid(row=1,column=1)
@@ -69,6 +78,6 @@ l5.grid(row=4,column=0)
 t5.grid(row=5,column=0)
 
 r.eval('tk::PlaceWindow . center')
-bt.place(x=168, y=176)
+bt.place(x=150, y=176)
 l7.place(x=135, y=154)
 r.mainloop()
