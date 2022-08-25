@@ -18,6 +18,8 @@ def submit():
     cursor.execute(sql,data)
     ab=cursor.fetchone()
     # s=cursor.fetchmany()
+
+    
     print(ab[0])
     if (pass1==ab[0]):
         l3.config(text='''Welcome!,logged in successfully''')
