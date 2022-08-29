@@ -9,8 +9,7 @@ f = ("Times bold", 14)
 r.title("Sign-in page")
 def submit():
     firstname=(t1.get())
-    if not firstname.isalpha():
-        l7.config(text="zc",fg='red')
+
     lastname=(t2.get())
     username=(t3.get())
     email=(t4.get())
@@ -22,6 +21,12 @@ def submit():
     # for i in result:
     #     print(i[0])
 
+
+
+    
+
+
+
     add_page = ("INSERT INTO page "
                "(first_name, last_name, username, email, password, cpassword) "
                "VALUES (%s, %s, %s, %s, %s, %s)")
@@ -31,18 +36,22 @@ def submit():
     
     # if(username==i[0]):
     #     l7.config(text="name already taken",fg='red')
-    if(password == cpassword and lastname.isalpha() and username and '@'in email and password and cpassword and firstname!= "" and firstname.isalpha()):
+    if(password == cpassword  and username and '@'in email and password and cpassword and firstname!= "" ):
 
         cursor.execute(add_page, data_page)
 
         cnx.commit()
 
         cursor.close()
-        cnx.close()        
+        cnx.close()  
         r.destroy()
-        import project_login
-    elif(firstname and lastname and username and email and password and cpassword != "" and password != cpassword):
+        import project_login      
+  
+    if (firstname and lastname and username and email and password and cpassword != "" and password != cpassword):
         l7.config(text="passwords do no match!",fg='red')
+
+    if not firstname.isalpha() or not lastname.isalpha():
+        l7.config(text="Invalid firstname or lastname",fg='red')
 
     else:
         l7.config(text="something is missing!",fg='red')

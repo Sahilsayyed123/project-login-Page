@@ -8,9 +8,8 @@ ws['bg']='#5d8a82'
 
 f = ("Times New Roman", 14)
 
-def back():
+def Exit():
     ws.destroy()
-    import project_login
 
     
 Label(
@@ -25,9 +24,10 @@ Label(
 
 Button(
     ws, 
-    text="Go to Login page", 
+    text="Press to Exit",
     font=f,
-    command=back,
+    command=Exit,
+    cursor="hand2"
 
     ).pack(fill=X, expand=TRUE, side=LEFT)
 
