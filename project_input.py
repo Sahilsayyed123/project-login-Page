@@ -62,7 +62,7 @@ l6=Label(r,text="Confirm-Password",font=('Times New Roman',13))
 t6=Entry(r,bd=5,show=None,font=('Times New Roman',13))
 t6=Entry(r,bd=5,show='*',font=('Times New Roman',13))
 bt=Button(r,text="Submit",command=lambda: submit(),width=10,bg="light blue",fg="black",cursor="hand2")
-l7=Label(r,text="",font=('Times New Roman',13))
+l7=Label(r,text="",font=('Times New Roman',10))
 
 l2.grid(row=0,column=1)
 t2.grid(row=1,column=1)
@@ -78,6 +78,9 @@ l5.grid(row=4,column=0)
 t5.grid(row=5,column=0)
 
 r.eval('tk::PlaceWindow . center')
-bt.place(x=150, y=176)
-l7.place(x=135, y=154)
+bt.place(x=153, y=190)
+
+
+l7.place(x=137, y=166)
+
 r.mainloop()
