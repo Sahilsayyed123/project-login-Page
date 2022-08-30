@@ -14,7 +14,7 @@ def Exit():
     
 Label(
     ws,
-    text="YOU HAVE SUCCESSFULLY LOGGED IN",
+    text='''YOU HAVE SUCCESSFULLY LOGGED IN''',
     padx=20,
     pady=20,
     bg='#5d8a82',

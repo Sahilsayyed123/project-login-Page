@@ -1,3 +1,4 @@
+from ctypes import resize
 from tkinter import*
 import mysql.connector
 
@@ -7,6 +8,7 @@ cursor = cnx.cursor()
 r = Tk()
 f = ("Times bold", 14)
 r.title("Sign-in page")
+
 def submit():
     firstname=(t1.get())
 
@@ -55,7 +57,8 @@ def submit():
 
     else:
         l7.config(text="something is missing!",fg='red')
-r.geometry('393x250')
+r.geometry('393x450')
+mainl=Label(r,text='Register',font=('Bahnschrift SemiBold',18))
 l1=Label(r,text="First name",font=('Times New Roman',13))
 t1=Entry(r,bd=5,font=('Times New Roman',13))
 l2=Label(r,text="Last name",font=('Times New Roman',13))
@@ -70,26 +73,37 @@ t5=Entry(r,bd=5,show='*',font=('Times New Roman',13))
 l6=Label(r,text="Confirm-Password",font=('Times New Roman',13))
 t6=Entry(r,bd=5,show=None,font=('Times New Roman',13))
 t6=Entry(r,bd=5,show='*',font=('Times New Roman',13))
-bt=Button(r,text="Submit",command=lambda: submit(),width=10,bg="light blue",fg="black",cursor="hand2")
+bt=Button(r,text="Submit",command=lambda: submit(),width=20,bg="light blue",fg="black",cursor="hand2")
 l7=Label(r,text="",font=('Times New Roman',10))
 
-l2.grid(row=0,column=1)
-t2.grid(row=1,column=1)
-l4.grid(row=2,column=1)
-t4.grid(row=3,column=1)
-l6.grid(row=4,column=1)
-t6.grid(row=5,column=1)
-l1.grid(row=0,column=0)
-t1.grid(row=1,column=0)
-l3.grid(row=2,column=0)
-t3.grid(row=3,column=0)
-l5.grid(row=4,column=0)
-t5.grid(row=5,column=0)
+# l2.grid(row=0,column=1)
+# t2.grid(row=1,column=1)
+# l4.grid(row=2,column=1)
+# t4.grid(row=3,column=1)
+# l6.grid(row=4,column=1)
+# t6.grid(row=5,column=1)
+# l1.grid(row=0,column=0)
+# t1.grid(row=1,column=0)
+# l3.grid(row=2,column=0)
+# t3.grid(row=3,column=0)
+# l5.grid(row=4,column=0)
+# t5.grid(row=5,column=0)
+mainl.place(x=150,y=15)
+l1.place(x=40,y=80)
+l2.place(x=40,y=130)
+l3.place(x=40,y=180)
+l4.place(x=40,y=230)
+l5.place(x=40,y=280)
+l6.place(x=40,y=330)
+t1.place(x=180,y=80)
+t2.place(x=180,y=130)
+t3.place(x=180,y=180)
+t4.place(x=180,y=230)
+t5.place(x=180,y=280)
+t6.place(x=180,y=330)
+
+bt.place(x=113, y=400)
+l7.place(x=110, y=370)
 
 r.eval('tk::PlaceWindow . center')
-bt.place(x=153, y=190)
-
-
-l7.place(x=137, y=166)
-
 r.mainloop()
