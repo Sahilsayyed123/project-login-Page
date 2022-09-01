@@ -49,7 +49,6 @@ def submit():
     ab=cursor.fetchone()
 
     if (pass1==ab[0]):
-        l3.config(text='''Welcome!,logged in successfully''')
         cnx.close()
         r.destroy()
         import logged_in
