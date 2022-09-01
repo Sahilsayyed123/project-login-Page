@@ -28,6 +28,7 @@ def reset():
 
     if (email==""):
         new=Toplevel(r)
+        new.title("Error !!")
         new['bg']='white'
         new.geometry('400x300')
         lql=Label(new,text="ERROR",font=('Sans Serif',13))
@@ -35,6 +36,7 @@ def reset():
 
     elif(email==sql):
         new1=Toplevel(r)
+        new1.title("Error !!")
         new1['bg']='white'
         new1.geometry('400x300')
         lql1=Label(new1,text=ab[0],font=('Sans Serif',13))
@@ -42,6 +44,7 @@ def reset():
 
     else:
         new2=Toplevel(r)
+        new2.title("Important !!")
         new2.geometry('670x300')
         new2['bg']='white'
         lqll2=Label(new2,text="This is your password plss dont share with anyone !!",font=('Sans Serif',20),fg='Light blue',bg='white')
