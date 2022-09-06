@@ -1,4 +1,6 @@
 from tkinter import*
+from tkinter import messagebox
+
 import mysql.connector
 
 
@@ -26,28 +28,43 @@ def submit():
                "VALUES (%s, %s, %s, %s, %s, %s)")
     data_page = (firstname, lastname, username, email, password, cpassword)
     
+    if any(ch.isdigit() for ch in firstname):
+        l7.config(text = 'Invalid Username or Password',fg="red")
 
-    if(password == cpassword  and username and '@'in email and password and cpassword and firstname!= "" ):
+    elif any(ch1.isdigit() for ch1 in lastname):
+        l7.config(text = 'Invalid Username or Password',fg="red")
+
+    elif(password == cpassword  and username and '@' not in email and password and cpassword and firstname!= "" ):
+        l7.place(x=150, y=370)
+        l7.config(text = 'Invalid Email',fg="red")   
+
+  
+    elif(password == cpassword  and username and '@' in email and password and cpassword and firstname!= "" ):
 
         cursor.execute(add_page, data_page)
         cnx.commit()
         cursor.close()
         cnx.close()  
         r.destroy()
-        import project_login      
-  
-
+        import project_login
     if (firstname and lastname and username and email and password and cpassword != "" and password != cpassword):
-        
-        l7.config(text="passwords do no match!",fg='red')
+        l7.place(x=135, y=370)
+        l7.config(text="Passwords do not match !",fg='red')
 
-    if not firstname.isalpha() or not lastname.isalpha():
-        
-        l7.config(text="Invalid firstname or lastname",fg='red')
 
-    else:
+    # if not firstname.isalpha() or not lastname.isalpha():
+    #     l7.config(text="Invalid First Name or Last Name !",fg='red')
+        # messagebox.showerror("ERROR", "Invalid First name or Last name")
+
+    # if ( username or email or password or cpassword == ""):
+    #     l7.config(text="something is missing!",fg='red')
+        # messagebox.showerror("ERROR", "something is wrong")
+    # if any(ch.isdigit() for ch in firstname):
+    #     l7.config(text = 'Name can\'t have numbers',fg="red")
+
+
         
-        l7.config(text="something is missing!",fg='red')
+
 
 
 
@@ -67,7 +84,7 @@ t5=Entry(r,bd=5,show='*',font=('Times New Roman',13),fg="#81599F",bg='white')
 l6=Label(r,text="Confirm-Password",font=('Times New Roman',13),fg="#340744",bg='white')
 t6=Entry(r,bd=5,show=None,font=('Times New Roman',13),fg="#81599F",bg='white')
 t6=Entry(r,bd=5,show='*',font=('Times New Roman',13),fg="#81599F",bg='white')
-bt=Button(r,text="Register",command=lambda: submit(),width=20,bg="light blue",fg="black",cursor="hand2",font=('Times New Roman',14))
+bt=Button(r,text="Register",command=lambda: submit(),width=20,bg="#81599F",activebackground="Light blue",fg="black",cursor="hand2",font=('Times New Roman',14))
 l7=Label(r,text="",font=('Times New Roman',10),bg="white")
 
 mainl.place(x=150,y=15)
@@ -84,7 +101,7 @@ t4.place(x=180,y=230)
 t5.place(x=180,y=280)
 t6.place(x=180,y=330)
 bt.place(x=90, y=395)
-l7.place(x=110, y=370)
+l7.place(x=130, y=370)
 
 r.eval('tk::PlaceWindow . center')
 r.mainloop()
