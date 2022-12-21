@@ -11,7 +11,6 @@ f = ("Times New Roman", 14)
 def Exit():
     ws.destroy()
 
-   
 Label(
     ws,
     text='''YOU HAVE SUCCESSFULLY LOGGED IN''',

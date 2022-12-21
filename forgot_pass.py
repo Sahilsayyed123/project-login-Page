@@ -1,17 +1,18 @@
-from tkinter import*
+from tkinter import *
 from tkinter import messagebox
-from PIL import Image,ImageTk
+from PIL import Image, ImageTk
 import mysql.connector
 
 
-cnx = mysql.connector.connect(user='root',password='Pass@123', database='login')
+cnx = mysql.connector.connect(
+    user='root', password='12345678', database='login')
 cursor = cnx.cursor()
 
 
-r=Tk()
+r = Tk()
 r.geometry('875x470')
-r['bg']='white'
-sql=("select password from page where email ="''" %s"''"")
+r['bg'] = 'white'
+sql = ("select password from page where email ="''" %s"''"")
 
 
 def back(new2):
@@ -21,15 +22,13 @@ def back(new2):
 
 
 def reset():
-    email=(email_entry.get())
-    data=(email,)
-    cursor.execute(sql,data)
-    ab=cursor.fetchone()
+    email = (email_entry.get())
+    data = (email,)
+    cursor.execute(sql, data)
+    ab = cursor.fetchone()
 
-
-
-    if(email==""):
-        messagebox.showerror("ERROR","Something is missing")
+    if (email == ""):
+        messagebox.showerror("ERROR", "Something is missing")
         # new1=Toplevel(r)
         # new1.title("Error !!")
         # new1['bg']='white'
@@ -38,7 +37,7 @@ def reset():
         # lql1.place(x=0,y=0)
 
     else:
-        messagebox.showinfo("Important!!",("*Please do not share !",ab[0]))
+        messagebox.showinfo("Important!!", ("*Please do not share !", ab[0]))
         # new2=Toplevel(r)
         # new2.title("Important !!")
         # new2.geometry('670x300')
@@ -51,21 +50,27 @@ def reset():
         # bbt.place(x=250,y=100)
 
 
-header=Label(r,text='FORGOT ',font=('Lucida Fax',30),bg='white',fg="#4120A9")
-header2=Label(r,text='YOUR PASSWORD ? ',font=('Lucida Fax',30),bg='white',fg="#4120A9")
-text1=Label(r,text="you can reset your password here",font=('Lucida Sans',14),bg='white',fg="#4120A9")
-email=Label(r,text="Email Address",font=('Lucida Sans',16),bg='white',fg="#4120A9")
-email_entry=Entry(r,bd=5,font=('Lucida Sans',14), width=31,bg='white',fg="#9571D5")
-button=Button(r,text="Send Password",command=reset,font=('Lucida Fax',14),width=31,bg="#4120A9",activebackground="#9571D5",fg='white',cursor='hand2')
-image=Image.open("C:/Users/ilmuser/Downloads/ffs.webp")
-re_image=image.resize((420,470),Image.ANTIALIAS)
-image=ImageTk.PhotoImage(re_image)
-Label(r,image= image,bg='white',fg="#4120A9").place(x=0,y=0)
-header.place(x=450,y=40)
-header2.place(x=450,y=100)
-text1.place(x=450,y=190)
-email.place(x=450,y=260)
-email_entry.place(x=450,y=295)  
-button.place(x=450,y=355)
+header = Label(r, text='FORGOT ', font=(
+    'Lucida Fax', 30), bg='white', fg="#4120A9")
+header2 = Label(r, text='YOUR PASSWORD ? ', font=(
+    'Lucida Fax', 30), bg='white', fg="#4120A9")
+text1 = Label(r, text="you can reset your password here",
+              font=('Lucida Sans', 14), bg='white', fg="#4120A9")
+email = Label(r, text="Email Address", font=(
+    'Lucida Sans', 16), bg='white', fg="#4120A9")
+email_entry = Entry(r, bd=5, font=('Lucida Sans', 14),
+                    width=31, bg='white', fg="#9571D5")
+button = Button(r, text="Send Password", command=reset, font=('Lucida Fax', 14),
+                width=31, bg="#4120A9", activebackground="#9571D5", fg='white', cursor='hand2')
+image = Image.open("D:/sahisayyed/project-login-Page/images/loggedin.webp")
+re_image = image.resize((420, 470), Image.ANTIALIAS)
+image = ImageTk.PhotoImage(re_image)
+Label(r, image=image, bg='white', fg="#4120A9").place(x=0, y=0)
+header.place(x=450, y=40)
+header2.place(x=450, y=100)
+text1.place(x=450, y=190)
+email.place(x=450, y=260)
+email_entry.place(x=450, y=295)
+button.place(x=450, y=355)
 
 r.mainloop()
