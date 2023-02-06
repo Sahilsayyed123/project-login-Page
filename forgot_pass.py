@@ -2,11 +2,17 @@ from tkinter import *
 from tkinter import messagebox
 from PIL import Image, ImageTk
 import mysql.connector
+import smtplib
+import string
+import random
 
 
 cnx = mysql.connector.connect(
-    user='root', password='12345678', database='login')
+    user='root', password='msd10911', database='login')
 cursor = cnx.cursor()
+
+server = smtplib.SMTP('smtp.gmail.com', 587)
+server.starttls()
 
 
 r = Tk()
@@ -27,27 +33,23 @@ def reset():
     cursor.execute(sql, data)
     ab = cursor.fetchone()
 
+    S = 6
+    ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k=S))
+    otp = str(ran)
+    data1 = (otp, email)
+    sql1 = ("update page set OTP ="''"%s"''" where email ="''"%s"''"")
+    cursor.execute(sql1, data1,)
+    cnx.commit()
+
+    server.login("sahilsayyed0409@gmail.com", "qldfxklffpealjuq")
+
     if (email == ""):
         messagebox.showerror("ERROR", "Something is missing")
-        # new1=Toplevel(r)
-        # new1.title("Error !!")
-        # new1['bg']='white'
-        # new1.geometry('400x300')
-        # lql1=Label(new1,text=ab[0],font=('Sans Serif',13))
-        # lql1.place(x=0,y=0)
 
     else:
-        messagebox.showinfo("Important!!", ("*Please do not share !", ab[0]))
-        # new2=Toplevel(r)
-        # new2.title("Important !!")
-        # new2.geometry('670x300')
-        # new2['bg']='white'
-        # lqll2=Label(new2,text="This is your password plss dont share with anyone !!",font=('Sans Serif',20),fg='Light blue',bg='white')
-        # lql2=Label(new2,text=ab[0],font=('Times New Roman',23),fg="violet",bg="Light Blue")
-        # bbt=Button(new2,text="Go Back",command=lambda:back(new2),font=('Times New Roman',23),fg="violet",bg="Light Blue")
-        # lql2.place(x=20,y=60)
-        # lqll2.place(x=20,y=20)
-        # bbt.place(x=250,y=100)
+        messagebox.showinfo("Hello", "Please Check your email")
+        msg = "\r\n".join(["Please do not share! your OTP is", str(ran),])
+        server.sendmail("sahilsayyed0409@gmail.com", email, msg)
 
 
 header = Label(r, text='FORGOT ', font=(
@@ -62,7 +64,8 @@ email_entry = Entry(r, bd=5, font=('Lucida Sans', 14),
                     width=31, bg='white', fg="#9571D5")
 button = Button(r, text="Send Password", command=reset, font=('Lucida Fax', 14),
                 width=31, bg="#4120A9", activebackground="#9571D5", fg='white', cursor='hand2')
-image = Image.open("D:/sahisayyed/project-login-Page/images/loggedin.webp")
+image = Image.open(
+    "C:\PERSONAL PROJECTS\project-login-Page\images\loggedin.webp")
 re_image = image.resize((420, 470), Image.ANTIALIAS)
 image = ImageTk.PhotoImage(re_image)
 Label(r, image=image, bg='white', fg="#4120A9").place(x=0, y=0)

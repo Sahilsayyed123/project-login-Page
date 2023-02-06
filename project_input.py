@@ -1,14 +1,10 @@
 from tkinter import *
 from tkinter import messagebox
-from cryptography.fernet import Fernet
 import mysql.connector
 
-key = Fernet.generate_key()
-
-fernet = Fernet(key)
 
 cnx = mysql.connector.connect(
-    user='root', password='12345678', database='login', auth_plugin='mysql_native_password')
+    user='root', password='msd10911', database='login', auth_plugin='mysql_native_password')
 cursor = cnx.cursor()
 
 
@@ -24,11 +20,8 @@ def submit():
     lastname = (t2.get())
     username = (t3.get())
     email = (t4.get())
-
-    # password = (t5.get())
-    # cpassword = (t6.get())
-    password = fernet.encrypt(t5.get().encode())
-    cpassword = fernet.encrypt(t6.get().encode())
+    password = (t5.get())
+    cpassword = (t6.get())
 
     add_page = ("INSERT INTO page "
                 "(first_name, last_name, username, email, password, cpassword) "
@@ -37,6 +30,8 @@ def submit():
 
     if any(ch.isdigit() for ch in firstname):
         l7.config(text='Invalid Username or Password', fg="red")
+    elif (password == "" or cpassword == "" or username == "" or email == "" or firstname == "" or lastname == ""):
+        l7.config(text='Something is missing', fg="red")
 
     elif any(ch1.isdigit() for ch1 in lastname):
         l7.config(text='Invalid Username or Password', fg="red")
@@ -55,16 +50,6 @@ def submit():
     if (firstname and lastname and username and email and password and cpassword != "" and password != cpassword):
         l7.place(x=135, y=370)
         l7.config(text="Passwords do not match !", fg='red')
-
-    # if not firstname.isalpha() or not lastname.isalpha():
-    #     l7.config(text="Invalid First Name or Last Name !",fg='red')
-        # messagebox.showerror("ERROR", "Invalid First name or Last name")
-
-    # if ( username or email or password or cpassword == ""):
-    #     l7.config(text="something is missing!",fg='red')
-        # messagebox.showerror("ERROR", "something is wrong")
-    # if any(ch.isdigit() for ch in firstname):
-    #     l7.config(text = 'Name can\'t have numbers',fg="red")
 
 
 mainl = Label(r, text='Register', font=(
